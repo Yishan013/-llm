@@ -1,1 +1,97 @@
-# -llm
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>永續金融助手</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+        }
+        #chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+        .message {
+            max-width: 75%;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .user {
+            align-self: flex-end;
+            background-color: #007bff;
+            color: white;
+        }
+        .bot {
+            align-self: flex-start;
+            background-color: #f1f1f1;
+            color: black;
+        }
+        #input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            background-color: white;
+        }
+        input {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div class="message bot">你好！我是你的 AI 助手。</div>
+    </div>
+    <div id="input-container">
+        <input type="text" id="message-input" placeholder="輸入訊息...">
+        <button onclick="sendMessage()">發送</button>
+    </div>
+    <script>
+        function sendMessage() {
+            const input = document.getElementById("message-input");
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatContainer = document.getElementById("chat-container");
+            const userMessage = document.createElement("div");
+            userMessage.className = "message user";
+            userMessage.textContent = message;
+            chatContainer.appendChild(userMessage);
+            input.value = "";
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            setTimeout(() => {
+                const botMessage = document.createElement("div");
+                botMessage.className = "message bot";
+                botMessage.textContent = "這是 AI 的回應。";
+                chatContainer.appendChild(botMessage);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
